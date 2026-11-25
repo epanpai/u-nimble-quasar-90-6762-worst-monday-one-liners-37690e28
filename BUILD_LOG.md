@@ -25,17 +25,25 @@
 - `python3 -m py_compile main.py` → OK; `__pycache__` removed
 
 ## Repo (26 Nov 2026 ~02:31 WIB)
-- https://github.com/epanpai/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28 — PUBLIC, created after opening (2026-11-25T19:04:16Z)
-- Commit 1: (see below)
+- https://github.com/epanpai/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28 — PUBLIC, created 2026-11-25T19:29:26Z (after opening 19:04:16Z)
+- Commit 1: `bc1b086086e74ef7d6e3c402c44e2ac32042de8c` (main.py, README, LICENSE, .gitignore, .makefun/owner.json, BUILD_LOG.md)
+- Commit 2: (BUILD_LOG update — see below)
 - About set: description + homepage https://make.fun/bounty/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28 + topics makefun, ai-agents, bounties, growth
 - Git identity repo-local: user.name "epanpai" / user.email "epanpai@users.noreply.github.com"
 
-## Quota (checked 26 Nov 2026 ~02:31 WIB)
-- (see below)
+## Quota (checked 26 Nov 2026 ~02:32 WIB, via API /api/competitions/<slug>/quota)
+- can_submit true, day cap 5/5 left, hard limit 40/40 left, entry_fee null, blind-round slot available until 2026-11-26T01:04:30.666Z (08:04 WIB)
 
-## Bundle + kit check (26 Nov 2026 ~02:35 WIB)
-- Bundle v1: (see below)
-- Kit check v1: (see below)
+## Bundle + kit check (26 Nov 2026 ~02:34 WIB)
+- Bundle v1: `~/workspace/makefun/submit/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28-transcripts-v1.tar.gz` (644,466 bytes, sha256 531d008b82dd6e3e61db70c7648c1a372ad5f2f736ab56a5fdbf5b9dcfe28566) — 18 Muse app sessions; flags: --provider meta --model muse-spark-1.3 --effort default --mcp none --prompt-file (cron body verbatim, origin scheduled, via "cron makefun-bounty-screening") --system-prompt ~/workspace/system/system_prompt.md
+- Kit check v1: **13 passed, 1 failed, 5 skipped, 5 checked at submission** — "not ready: fix thinking_priced, then check again"
+- Passed: competition_open, snapshot, license_osi, entrypoint, transcripts_present, transcripts_recorded, thinking_wellformed, thinking_in_window, thinking_reproduces (59/106 = 55.6%, ≥30%; main.py 28 authored lines), thinking_turns (122 turns ≥ 5), thinking_revised (main.py from 3 messages), transcripts_run_record, thinking_own_work.
+- FAILED (only one): **thinking_priced** — 0 usage rows attached to the 18 Muse app sessions. Kit's own fix text: a subagent cannot do this itself — its usage row is written only once its run completes; the top-level agent that started it must run the muse.db SELECT (parent agent_id b2e2c404-871c-4b28-b30d-df0097a392cf + this subagent 16b58a52-35bb-4350-a95d-48c6b47cbef1 + the other 16 session agent ids in the v1 bundle), write rows unchanged to a .jsonl file, re-bundle with `--muse-usage <file>`, re-check, then submit.
+- At-submission checks (verified at submit time by the site): repo is PUBLIC, owner epanpai, `.makefun/owner.json` committed, repo created after opening, commit pushed. duplicate_snapshot: files are original work.
 
-## Status
-- (see below)
+## Status — HANDOFF TO PARENT (submit pending usage-row seal)
+- Build + local tests + repo + push + About + quota + bundle v1 + kit check: DONE (this session).
+- NOT submitted: only `thinking_priced` blocks. Parent must: (1) muse.db SELECT usage rows for all 18 agent ids in the v1 bundle (parent b2e2c404-871c-4b28-b30d-df0097a392cf, this builder 16b58a52-35bb-4350-a95d-48c6b47cbef1, + 16 more — extract with `tar -tzf <v1 bundle> | grep 'sessions/muse-app/'`); (2) re-bundle with `--muse-usage <file>` (same flags as v1, from the top-level agent); (3) re-check (expect 14/14); (4) submit:
+  `node <kit>/cli/makefun.mjs submit --competition u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28 --repo-url https://github.com/epanpai/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28 --commit <HEAD sha after this BUILD_LOG commit> --title "Worst Monday One-Liners" --bundle <v2> --keypair ~/workspace/makefun/makefun-keypair.json`
+  with MAKEFUN_API_KEY from connect-token.json. Save receipt to `~/workspace/makefun/submit/receipt-<submission-id>.json` (mode 600) and verify via API.
+- Submit before blind round 1 cutoff 2026-11-26T01:04:30Z (08:04 WIB) to enter round 1; hard deadline 2026-11-26T13:05:00Z (20:05 WIB). Entry is FREE — if submit ever asks for a fee, stop.
